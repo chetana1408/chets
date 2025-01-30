@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #fce8e6;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .bear-img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+        .btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+        .btn-yes {
+            background-color: green;
+            color: white;
+        }
+        .btn-no {
+            background-color: red;
+            color: white;
+            position: absolute;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: red;
+            animation: floatHearts 3s linear infinite;
+        }
+        @keyframes floatHearts {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+    <script>
+        function moveNoButton() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            document.getElementById("noBtn").style.left = `${x}px`;
+            document.getElementById("noBtn").style.top = `${y}px`;
+        }
+        function sayYes() {
+            document.getElementById("message").innerText = "Yayyyy! Can't wait for our date! ❤️🥰";
+            document.getElementById("bearImage").src = "https://i.pinimg.com/474x/3a/bd/2b/3abd2bd205dad22af6a2bc67f9db6d26.jpg";
+            let heartsContainer = document.getElementById("hearts");
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <img id="bearImage" src="https://i.pinimg.com/474x/2a/34/c9/2a34c95330d483685437ae5698b12fd9.jpg" alt="Cute bear with hearts" class="bear-img">
+    <div class="question">Can you be my date, Mr. Shushruth? ❤️</div>
+    <div class="btn-container">
+        <button class="btn btn-yes" onclick="sayYes()">Yes! 💖</button>
+        <button id="noBtn" class="btn btn-no" onmouseover="moveNoButton()">No 💔</button>
+    </div>
+    <p id="message"></p>
+    <div id="hearts" class="hearts"></div>
+</body>
+</html>
